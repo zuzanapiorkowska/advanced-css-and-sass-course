@@ -14,7 +14,7 @@ Dark green: #28b485
 }
 
 body {
-    font-family: "Lato" sans-serif;
+    font-family: "Lato", sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
@@ -32,7 +32,7 @@ url(../img/hero.jpg);
 background-size: cover;
 background-position: top;
 /* która część obrazka będzie widoczna? */
-clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
 position: relative;
 }
 
@@ -44,4 +44,41 @@ left: 40px;
 
 .logo {
 height: 35px;
+}
+
+.text-box {
+    position: absolute;
+    top: 40%;
+    /* bo jest ścięte na dole i wyglądało krzywo */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* bo to 50% względem siebie */
+}
+
+.heading-primary {
+    color: white;
+    text-transform: uppercase;
+}
+
+.heading-primary .main {
+display: block;
+font-size: 60px;
+font-weight: 700;
+letter-spacing: 35px;
+}
+
+.heading-primary .sub {
+display: block;
+font-size: 20px;
+font-weight: 700;
+letter-spacing: 17.4px;
+}
+
+@keyframes moveInLeft {
+    0% {
+
+    }
+    100% {
+        
+    }
 }
