@@ -7,78 +7,182 @@ Dark green: #28b485
 
 */
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: "Lato", sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.7;
-    color: #777;
-    padding: 30px;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #777;
+  padding: 30px;
 }
 
 .header {
-height: 95vh;
-background-image: linear-gradient(
-    to right bottom,
-rgba(126, 213, 111, 0.80),
-rgba(39, 180, 133, 0.8)),
-url(../img/hero.jpg);
-background-size: cover;
-background-position: top;
-/* która część obrazka będzie widoczna? */
-clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
-position: relative;
+  height: 95vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(126, 213, 111, 0.8),
+      rgba(39, 180, 133, 0.8)
+    ),
+    url(../img/hero.jpg);
+  background-size: cover;
+  background-position: top;
+  /* która część obrazka będzie widoczna? */
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+  position: relative;
 }
 
 .logo-box {
-position: absolute;
-top: 40px;
-left: 40px;
+  position: absolute;
+  top: 40px;
+  left: 40px;
 }
 
 .logo {
-height: 35px;
+  height: 35px;
 }
 
 .text-box {
-    position: absolute;
-    top: 40%;
-    /* bo jest ścięte na dole i wyglądało krzywo */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* bo to 50% względem siebie */
+  position: absolute;
+  top: 40%;
+  /* bo jest ścięte na dole i wyglądało krzywo */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* bo to 50% względem siebie */
+  text-align: center;
 }
 
 .heading-primary {
-    color: white;
-    text-transform: uppercase;
+  color: white;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  /* żeby się nie trzęsło */
+  margin-bottom: 60px;
 }
 
 .heading-primary .main {
-display: block;
-font-size: 60px;
-font-weight: 700;
-letter-spacing: 35px;
+  display: block;
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: 35px;
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  /* 
+  animation-iteration-count: 3;
+  animation-delay: 3s; 
+  */
 }
 
 .heading-primary .sub {
-display: block;
-font-size: 20px;
-font-weight: 700;
-letter-spacing: 17.4px;
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 17.4px;
+  animation: moveInRight 1s ease-out;
 }
 
 @keyframes moveInLeft {
-    0% {
+  0% {
+    opacity: 0;
+    transform: translate(-100px);
+  }
+  80% {
+    transform: translateX(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
 
+@keyframes moveInRight {
+  /* można ich też użyć np. na hover */
+  0% {
+    opacity: 0;
+    transform: translate(100px);
+  }
+  80% {
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInBottom {
+    /* można ich też użyć np. na hover */
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
     }
     100% {
-        
+      opacity: 1;
+      transform: translate(0);
     }
+  }
+
+.btn:link,
+.btn:visited {
+  /* sudoclasses - states of selectors, when it is link element
+      jest też :visited - jest to link, który już został odwiedzony */
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  border-radius: 100px;
+  transition: all .2s;
+  position: relative;
+}
+
+.btn-white {
+    background-color: white;
+    color: #777;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0, 0.2 );
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0,0,0, 0.2 );
+}
+
+.btn::after {
+    /* pseudo-element */
+content: "";
+display: inline-block;
+height: 100%;
+width: 100%;
+border-radius: 100px;
+position:absolute;
+top: 0;
+left: 0;
+z-index: -1;
+/* rzeczy powyżej muszą być. jest traktowany jak child of element */
+transition: all .4s;
+}
+
+.btn-white::after {
+    background-color: white;
+}
+
+.btn:hover::after{
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn-animated {
+    animation: moveInBottom .5s ease-out .75s;
+    /* czwarta pozycja to delay */
+    animation-fill-mode: backwards;
+    /* automatically applies styles of the 0% before the animation starts */
 }
